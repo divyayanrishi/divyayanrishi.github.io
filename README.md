@@ -1,6 +1,5 @@
-# deydiv.github.io
 
-<h1 align="center">Hi 👋, I'm Divyayan(he/him) !</h1>
+<h1 align="center">Hi 👋, I'm Divyayan (he/him) !</h1>
 <h3 align="center">You can call me Div if that's lexicographically easier for you. I am currently a Master's thesis student at Scania Group and KTH Royal Institute of Technology.</h3>
 
 - 🔭 I’m currently working on **Computer Vision for human action recognition in industrial settings.**
