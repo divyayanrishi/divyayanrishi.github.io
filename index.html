@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divyayan Rishi - AI Engineering Enthusiast</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00ff88;
+            --accent: #ff0080;
+            --dark: #0a0e27;
+            --darker: #050816;
+            --text: #e0e6ff;
+            --text-dim: #8892b0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--darker);
+            color: var(--text);
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+
+        /* Animated background grid */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: 
+                linear-gradient(90deg, rgba(0, 255, 136, 0.03) 1px, transparent 1px),
+                linear-gradient(rgba(0, 255, 136, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .glow-orb {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .orb-1 {
+            background: var(--primary);
+            top: -200px;
+            right: -200px;
+            animation: float 15s ease-in-out infinite;
+        }
+
+        .orb-2 {
+            background: var(--accent);
+            bottom: -200px;
+            left: -200px;
+            animation: float 20s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(100px, -100px) scale(1.1); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header with glitch effect */
+        header {
+            padding: 2rem 0;
+            position: sticky;
+            top: 0;
+            backdrop-filter: blur(10px);
+            background: rgba(10, 14, 39, 0.8);
+            z-index: 100;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.1);
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .logo::before {
+            content: 'DR';
+            position: absolute;
+            left: 2px;
+            text-shadow: -2px 0 var(--accent);
+            opacity: 0.7;
+            animation: glitch 3s infinite;
+        }
+
+        @keyframes glitch {
+            0%, 90%, 100% { opacity: 0; }
+            92% { opacity: 0.7; transform: translate(-2px, 0); }
+            94% { opacity: 0.7; transform: translate(2px, 0); }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4rem;
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .hero-content {
+            flex: 1;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .greeting {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+
+        .greeting::before {
+            content: '> ';
+            color: var(--accent);
+        }
+
+        h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .bio {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-dim);
+            margin-bottom: 3rem;
+            max-width: 600px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: 2px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 700;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .btn:hover {
+            color: var(--darker);
+        }
+
+        .btn:hover::before {
+            left: 0;
+        }
+
+        .btn.secondary {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .btn.secondary::before {
+            background: var(--accent);
+        }
+
+        /* Photo container with tech aesthetic */
+        .photo-container {
+            position: relative;
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+        }
+
+        .photo-frame {
+            position: relative;
+            width: 350px;
+            height: 350px;
+            border: 3px solid var(--primary);
+            transform: rotate(3deg);
+            transition: transform 0.4s ease;
+            background: var(--dark);
+            box-shadow: 
+                0 0 40px rgba(0, 255, 136, 0.3),
+                inset 0 0 40px rgba(0, 255, 136, 0.1);
+        }
+
+        .photo-frame:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+
+        .photo-frame::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 1px solid var(--accent);
+            transform: rotate(-3deg);
+            z-index: -1;
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--primary);
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+        }
+
+        /* Replace .photo-placeholder with your actual photo */
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(20%) contrast(1.1);
+        }
+
+        .scan-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+            box-shadow: 0 0 10px var(--primary);
+            animation: scan 4s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { top: 0; opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { top: 100%; opacity: 1; }
+        }
+
+        /* Skills Section */
+        .skills-section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 3rem;
+            color: var(--primary);
+        }
+
+        .section-title::before {
+            content: '// ';
+            color: var(--accent);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            padding: 2rem;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            background: rgba(10, 14, 39, 0.5);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            border-color: transparent;
+        }
+
+        .skill-card:hover::before {
+            opacity: 0.5;
+        }
+
+        .skill-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .skill-desc {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 0 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(0, 255, 136, 0.1);
+            margin-top: 4rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: var(--text-dim);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+
+            .bio {
+                max-width: 100%;
+            }
+
+            .cta-buttons {
+                justify-content: center;
+            }
+
+            .photo-frame {
+                width: 280px;
+                height: 280px;
+            }
+        }
+
+        /* Terminal cursor effect */
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 1.2em;
+            background: var(--primary);
+            animation: blink 1s step-end infinite;
+            margin-left: 3px;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+
+    <header>
+        <div class="container">
+            <div class="logo">DR</div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <div class="hero-content">
+                <div class="greeting">Hello, world!</div>
+                <h1>Divyayan Rishi<span class="cursor"></span></h1>
+                <div class="tagline">AI Engineering Enthusiast</div>
+                <p class="bio">
+                    Building intelligent systems and exploring the frontiers of artificial intelligence. 
+                    Passionate about machine learning, neural networks, and creating technology that shapes the future.
+                    Always learning, always building.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#projects" class="btn">View Projects</a>
+                    <a href="#contact" class="btn secondary">Get In Touch</a>
+                </div>
+            </div>
+            <div class="photo-container">
+                <div class="photo-frame">
+                    <!-- Replace this div with an img tag pointing to your photo -->
+                    <div class="photo-placeholder">DR</div>
+                    <!-- Example: <img src="your-photo.jpg" alt="Divyayan Rishi"> -->
+                </div>
+                <div class="scan-line"></div>
+            </div>
+        </section>
+
+        <section class="skills-section">
+            <h2 class="section-title">Expertise</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">🤖</div>
+                    <h3 class="skill-title">Machine Learning</h3>
+                    <p class="skill-desc">Deep learning, neural networks, and developing intelligent algorithms that learn from data.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">⚡</div>
+                    <h3 class="skill-title">AI Engineering</h3>
+                    <p class="skill-desc">Building scalable AI systems, model deployment, and production-ready ML pipelines.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🧠</div>
+                    <h3 class="skill-title">Neural Networks</h3>
+                    <p class="skill-desc">Designing and training deep neural architectures for computer vision and NLP tasks.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">📊</div>
+                    <h3 class="skill-title">Data Science</h3>
+                    <p class="skill-desc">Statistical analysis, data visualization, and extracting insights from complex datasets.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="social-links">
+                <a href="https://github.com/divyayanrishi" target="_blank" title="GitHub">GitHub</a>
+                <a href="https://linkedin.com/in/divyayanrishi" target="_blank" title="LinkedIn">LinkedIn</a>
+                <a href="mailto:your.email@example.com" title="Email">Email</a>
+            </div>
+            <p class="copyright">© 2026 Divyayan Rishi. Built with passion for AI.</p>
+        </div>
+    </footer>
+</body>
+</html>
