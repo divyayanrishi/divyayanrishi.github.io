@@ -102,17 +102,17 @@
 
         .logo {
             font-family: 'Syne', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1rem;
             font-weight: 800;
             color: var(--primary);
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             position: relative;
             display: inline-block;
         }
 
         .logo::before {
-            content: 'DR';
+            content: 'Like life, always under construction';
             position: absolute;
             left: 2px;
             text-shadow: -2px 0 var(--accent);
@@ -459,7 +459,154 @@
             0%, 50% { opacity: 1; }
             51%, 100% { opacity: 0; }
         }
+
+        /* Contact Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 8, 22, 0.95);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: var(--dark);
+            border: 2px solid var(--primary);
+            padding: 3rem;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 0 60px rgba(0, 255, 136, 0.4);
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            color: var(--accent);
+            cursor: pointer;
+            background: none;
+            border: none;
+            line-height: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .modal-close:hover {
+            transform: rotate(90deg);
+        }
+
+        .modal-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 2rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            background: rgba(10, 14, 39, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            border-color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .contact-details {
+            flex: 1;
+        }
+
+        .contact-label {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-value {
+            font-size: 1.1rem;
+            color: var(--text);
+            word-break: break-all;
+        }
+
+        .contact-value a {
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .contact-value a:hover {
+            color: var(--primary);
+        }
     </style>
+    <script>
+        function openContactModal() {
+            document.getElementById('contactModal').classList.add('active');
+        }
+
+        function closeContactModal() {
+            document.getElementById('contactModal').classList.remove('active');
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('contactModal');
+            if (event.target === modal) {
+                closeContactModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeContactModal();
+            }
+        });
+    </script>
 </head>
 <body>
     <div class="background"></div>
@@ -468,15 +615,15 @@
 
     <header>
         <div class="container">
-            <div class="logo">DR</div>
+            <div class="logo">Like like always under construction</div>
         </div>
     </header>
 
     <main class="container">
         <section class="hero">
             <div class="hero-content">
-                <div class="greeting">Hello, world!</div>
-                <h1>Divyayan Rishi<span class="cursor"></span></h1>
+                <div class="greeting">Hello !</div>
+                <h1>Divyayan Dey<span class="cursor"></span></h1>
                 <div class="tagline">AI Engineering Enthusiast</div>
                 <p class="bio">
                     Building intelligent systems and exploring the frontiers of artificial intelligence. 
@@ -485,7 +632,7 @@
                 </p>
                 <div class="cta-buttons">
                     <a href="#projects" class="btn">View Projects</a>
-                    <a href="#contact" class="btn secondary">Get In Touch</a>
+                    <button onclick="openContactModal()" class="btn secondary">Get In Touch</button>
                 </div>
             </div>
             <div class="photo-container">
@@ -530,10 +677,41 @@
             <div class="social-links">
                 <a href="https://github.com/divyayanrishi" target="_blank" title="GitHub">GitHub</a>
                 <a href="https://linkedin.com/in/divyayanrishi" target="_blank" title="LinkedIn">LinkedIn</a>
-                <a href="mailto:your.email@example.com" title="Email">Email</a>
+                <a href="/cdn-cgi/l/email-protection#0970667c7b276c64686065496c71686479656c276a6664" title="Email">Email</a>
             </div>
             <p class="copyright">© 2026 Divyayan Rishi. Built with passion for AI.</p>
         </div>
     </footer>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeContactModal()">&times;</button>
+            <h2 class="modal-title">Get In Touch</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <div class="contact-details">
+                        <div class="contact-label">Email</div>
+                        <div class="contact-value"><a href="mailto:divyayanrishi@gmail.com">divyayanrishi@gmail.com</a></div>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <div class="contact-details">
+                        <div class="contact-label">Phone</div>
+                        <div class="contact-value"><a href="tel:+46764527709">+46 764527709</a></div>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">💬</div>
+                    <div class="contact-details">
+                        <div class="contact-label">WhatsApp</div>
+                        <div class="contact-value"><a href="+917407219518">+917407219518</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
