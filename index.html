@@ -402,6 +402,169 @@
             line-height: 1.6;
         }
 
+        /* Now / Reading Sections */
+        .now-section,
+        .reading-section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .now-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .now-card {
+            padding: 2rem;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            background: rgba(10, 14, 39, 0.5);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .now-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.4s ease;
+        }
+
+        .now-card:hover::after {
+            width: 100%;
+        }
+
+        .now-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(0, 255, 136, 0.5);
+        }
+
+        .now-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            padding: 0.2rem 0.6rem;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .now-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.75rem;
+        }
+
+        .now-desc {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .now-meta {
+            margin-top: 1.25rem;
+            font-size: 0.8rem;
+            color: var(--primary);
+            opacity: 0.7;
+        }
+
+        .now-meta::before {
+            content: '→ ';
+        }
+
+        /* Book cards */
+        .book-card {
+            padding: 2rem;
+            border: 1px solid rgba(255, 0, 128, 0.2);
+            background: rgba(10, 14, 39, 0.5);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .book-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+            transition: width 0.4s ease;
+        }
+
+        .book-card:hover::after {
+            width: 100%;
+        }
+
+        .book-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 0, 128, 0.5);
+        }
+
+        .book-spine {
+            width: 6px;
+            min-height: 80px;
+            background: linear-gradient(180deg, var(--accent), var(--primary));
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+
+        .book-info {
+            flex: 1;
+        }
+
+        .book-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 0.2rem 0.6rem;
+            margin-bottom: 0.75rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .book-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.3rem;
+        }
+
+        .book-author {
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .book-desc {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .reading-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
         /* Footer */
         footer {
             padding: 4rem 0 2rem;
@@ -674,6 +837,57 @@
                 </div>
             </div>
         </section>
+
+        <!-- What I'm Working On -->
+        <section class="now-section">
+            <h2 class="section-title">What I'm Working On</h2>
+            <div class="now-grid">
+                <div class="now-card">
+                    <span class="now-tag">Category</span>
+                    <h3 class="now-title">Project or focus area title</h3>
+                    <p class="now-desc">A short description of what you're working on and why it's interesting to you.</p>
+                    <div class="now-meta">Tools or context</div>
+                </div>
+                <div class="now-card">
+                    <span class="now-tag">Category</span>
+                    <h3 class="now-title">Project or focus area title</h3>
+                    <p class="now-desc">A short description of what you're working on and why it's interesting to you.</p>
+                    <div class="now-meta">Tools or context</div>
+                </div>
+                <div class="now-card">
+                    <span class="now-tag">Category</span>
+                    <h3 class="now-title">Project or focus area title</h3>
+                    <p class="now-desc">A short description of what you're working on and why it's interesting to you.</p>
+                    <div class="now-meta">Tools or context</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- What I'm Reading -->
+        <section class="reading-section">
+            <h2 class="section-title">What I'm Reading</h2>
+            <div class="reading-grid">
+                <div class="book-card">
+                    <div class="book-spine"></div>
+                    <div class="book-info">
+                        <span class="book-tag">Technical</span>
+                        <div class="book-title">Placeholder — add your book here</div>
+                        <div class="book-author">Author Name</div>
+                        <p class="book-desc">A short note on why you're reading it or what you think of it so far.</p>
+                    </div>
+                </div>
+                <div class="book-card">
+                    <div class="book-spine"></div>
+                    <div class="book-info">
+                        <span class="book-tag">Non-fiction / Other</span>
+                        <div class="book-title">Placeholder — add your book here</div>
+                        <div class="book-author">Author Name</div>
+                        <p class="book-desc">A short note on why you're reading it or what you think of it so far.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <footer id="contact">
@@ -681,7 +895,7 @@
             <div class="social-links">
                 <a href="https://github.com/divyayanrishi" target="_blank" title="GitHub">GitHub</a>
                 <a href="https://www.linkedin.com/in/divyayan-dey-470238189/" target="_blank" title="LinkedIn">LinkedIn</a>
-                <a href="mailto:divyayanrishi@gmail.com" title="Email">Email</a>
+                <a href="/cdn-cgi/l/email-protection#9cf8f5eae5fde5fdf2eef5eff4f5dcfbf1fdf5f0b2fff3f1" title="Email">Email</a>
             </div>
             <p class="copyright">© 2026 Divyayan Dey. Learning to learn.</p>
         </div>
@@ -697,7 +911,7 @@
                     <div class="contact-icon">📧</div>
                     <div class="contact-details">
                         <div class="contact-label">Email</div>
-                        <div class="contact-value"><a href="mailto:divyayanrishi@gmail.com">divyayanrishi@gmail.com</a></div>
+                        <div class="contact-value"><a href="/cdn-cgi/l/email-protection#a3c7cad5dac2dac2cdd1cad0cbcae3c4cec2cacf8dc0ccce"><span class="__cf_email__" data-cfemail="7d19140b041c041c130f140e15143d1a101c1411531e1210">[email&#160;protected]</span></a></div>
                     </div>
                 </div>
                 <div class="contact-item">
@@ -711,11 +925,4 @@
                     <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
                     <div class="contact-details">
                         <div class="contact-label">WhatsApp</div>
-                        <div class="contact-value"><a href="https://wa.me/917407219518">+91 7407219518</a></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
+                        <div class=
